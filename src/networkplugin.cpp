@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2019 LG Electronics, Inc.
+// Copyright (c) 2016-2020 LG Electronics, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -93,6 +93,34 @@ void NetworkPlugin::connmanStatusCallback(JValue &previousValue, JValue &value)
 					LOG_INFO(MSGID_NETWORK_PLUGIN_INFO, 0, "Wired LAN cable disconnected");
 					this->manager->createToast(
 							this->getLocString("Wired LAN cable disconnected."),
+							SETTINGS_ICON_URL,
+							onClickAction);
+				}
+			}
+		}
+		// Wi-Fi toast
+		{
+			std::string prevState = "";
+			std::string curState = "";
+			auto status = previousValue["wifi"]["state"].asString(prevState);
+			if(CONV_OK == status)
+			{
+				status = value["wifi"]["state"].asString(curState);
+
+				// Toast only on state change
+				if ((CONV_OK == status) && (curState == "connected" && prevState == "disconnected"))
+				{
+					LOG_INFO(MSGID_NETWORK_PLUGIN_INFO, 0, "Wi-Fi network is connected");
+					this->manager->createToast(
+							this->getLocString("Wi-Fi network is connected."),
+							SETTINGS_ICON_URL,
+							onClickAction);
+				}
+				else if ((CONV_OK == status) && (curState == "disconnected" && prevState == "connected"))
+				{
+					LOG_INFO(MSGID_NETWORK_PLUGIN_INFO, 0, "Wi-Fi network is disconnected");
+					this->manager->createToast(
+							this->getLocString("Wi-Fi network is disconnected."),
 							SETTINGS_ICON_URL,
 							onClickAction);
 				}
