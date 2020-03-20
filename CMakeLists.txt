@@ -57,12 +57,12 @@ set(LIBS
 #############################################################################################
 ################################ DISTRIBUTION BRANCH GUIDE ##################################
 #############################################################################################
-# Below is the sample code how to branch the compilation based on each webos distribution
-# such as tv, wearable, signage etc. Since they have their own UX (User Experience) scene,
+# Below is the sample code how to branch the compilation based on each webos distribution.
+# Since they have their own UX (User Experience) scene,
 # network plugin for event-monitor should be modified for each distribution to meet their
 # requirement. For this requirement, we can maintain a single file to be chosen and compiled
-# for each distribution such as networkplugin_{tv, wearable, signage}.cpp using
-# "WEBOS_TARGET_DISTRO" variable inherited from oe build which implies which distribution
+# for each distribution such as networkplugin_{distribution1, distribution2, distribution3}.cpp
+# using "WEBOS_TARGET_DISTRO" variable inherited from oe build which implies which distribution
 # is being built.
 #
 #set(PLUGIN_IMPL "")
