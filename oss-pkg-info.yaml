@@ -1,0 +1,4 @@
+Open Source Software Package:
+- name: webOSOSE-event-monitor-network
+  source: git://github.com/webosose/event-monitor-network
+  license: Apache-2.0
